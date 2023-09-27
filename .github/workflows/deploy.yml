@@ -22,4 +22,4 @@ jobs:
           pass: ${{ secrets.DC_PASS }}
           script: |
             commit_hash=$(git rev-parse HEAD)
-            echo "Hello from commit $commit_hash" > $HOME/Documents/hello.txt
+            echo "Hello from commit $commit_hash" > ~/Documents/hello.txt
