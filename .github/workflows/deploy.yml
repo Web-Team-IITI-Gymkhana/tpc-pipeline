@@ -1,0 +1,25 @@
+name: ssh-pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: ssh pipeline
+        uses: cross-the-world/ssh-pipeline@master
+        with:
+          host: ${{ secrets.DC_HOST }}
+          user: ${{ secrets.DC_USER }}
+          pass: ${{ secrets.DC_PASS }}
+          script: |
+            commit_hash=$(git rev-parse HEAD)
+            echo "Hello from commit $commit_hash" > $HOME/Documents/hello.txt
