@@ -1,0 +1,28 @@
+name: frontend-deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: ssh scp ssh pipelines
+        uses: cross-the-world/ssh-scp-ssh-pipelines@v1.1.4
+        env:
+          BUILD_DIR: "~/tpc_portal/build"
+        with:
+          host: ${{ secrets.DC_HOST }}
+          user: ${{ secrets.DC_USER }}
+          pass: ${{ secrets.DC_PASS }}
+          first_ssh: |
+            rm -rf $BUILD_DIR
+          scp: |
+            './build/*' => $BUILD_DIR

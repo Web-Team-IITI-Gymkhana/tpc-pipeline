@@ -1,4 +1,4 @@
-name: ssh-pipeline
+name: configuration-change-deploy
 
 on:
   push:
@@ -6,20 +6,33 @@ on:
       - main
 
 jobs:
-  build:
-    name: Build
+  changed_files:
     runs-on: ubuntu-latest
-
+    name: Test changed-files
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v39
+        with:
+          files: ./**  # Alternatively using: `docs/**` or `docs`
+          files_ignore: build/**, README.md
+
+      - name: Continue only if any file(s) change
+        if: steps.changed-files.outputs.any_changed != 'true'
+        run: |
+          echo "No files has changed."
+          exit 0
+          
       - name: ssh pipeline
-        uses: cross-the-world/ssh-pipeline@master
+        uses: cross-the-world/ssh-pipeline@v1.2.0
         with:
           host: ${{ secrets.DC_HOST }}
           user: ${{ secrets.DC_USER }}
           pass: ${{ secrets.DC_PASS }}
           script: |
-            commit_hash=${{ github.head_ref }}.${{ github.sha }}
-            echo "Hello from commit $commit_hash" > ~/Documents/hello.txt
+            git -C ~/tpc-portal pull
+            docker-compose up -d --no-deps --build
