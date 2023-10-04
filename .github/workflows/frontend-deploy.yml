@@ -1,4 +1,4 @@
-name: frontend-deploy
+name: Frontend deploy
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
 
-      - name: ssh scp ssh pipelines
+      - name: scp
         uses: cross-the-world/ssh-scp-ssh-pipelines@v1.1.4
         env:
           BUILD_DIR: "~/tpc_portal/build"
