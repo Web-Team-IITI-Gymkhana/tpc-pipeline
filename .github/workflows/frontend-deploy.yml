@@ -23,10 +23,6 @@ jobs:
           user: ${{ secrets.DC_USER }}
           pass: ${{ secrets.DC_PASS }}
           first_ssh: |
-            if [ -d "$BUILD_DIR" ]; then
-              rm -rf "$BUILD_DIR"/*
-            else
-              mkdir -p "$BUILD_DIR"
-            fi
+            rm -rf $BUILD_DIR/* || mkdir -p $BUILD_DIR
           scp: |
             './build/*' => $BUILD_DIR
