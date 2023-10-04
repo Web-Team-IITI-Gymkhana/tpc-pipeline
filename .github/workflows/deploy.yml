@@ -32,7 +32,7 @@ jobs:
         if: steps.changed-files.outputs.any_changed == 'true'
         uses: cross-the-world/ssh-pipeline@v1.2.0
         env:
-          BUILD_DIR: "~/tpc_portal/build"
+          BUILD_DIR: "~/tpc_portal"
         with:
           host: ${{ secrets.DC_HOST }}
           user: ${{ secrets.DC_USER }}
