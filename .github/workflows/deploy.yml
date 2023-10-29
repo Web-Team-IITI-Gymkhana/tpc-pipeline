@@ -23,5 +23,4 @@ jobs:
           username: ${{ secrets.DC_USER }}
           password: ${{ secrets.DC_PASS }}
           script: |
-            cd $BUILD_DIR
-            touch iamhere.txt
+            cd $BUILD_DIR && touch iamhere.txt
