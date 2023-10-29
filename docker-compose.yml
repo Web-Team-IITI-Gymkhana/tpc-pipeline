@@ -5,6 +5,7 @@ services:
     restart: always
     ports:
       - 3000:3000
+      
   nginx:
     image: nginx:stable
     restart: always
