@@ -22,6 +22,7 @@ jobs:
           host: ${{ secrets.DC_HOST }}
           username: ${{ secrets.DC_USER }}
           password: ${{ secrets.DC_PASS }}
+          allenvs: true
           script: |
             cd $BUILD_DIR && touch iamhere.txt
             echo $BUILD_DIR > build_dir.txt
