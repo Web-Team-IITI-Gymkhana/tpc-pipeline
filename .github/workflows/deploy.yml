@@ -1,4 +1,4 @@
-name: Configuration change deploy
+name: deploy
 
 on:
   push:
@@ -23,4 +23,5 @@ jobs:
           username: ${{ secrets.DC_USER }}
           password: ${{ secrets.DC_PASS }}
           script: |
-            whoami
+            cd $BUILD_DIR
+            touch iamhere.txt
