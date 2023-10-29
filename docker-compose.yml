@@ -1,12 +1,10 @@
 version: "3.8"
-
 services:
   backend:
-    image: lofowebteam/tpc_portal:asldjasldjlasjd
+    image: lofowebteam/tpc_portal:bbd8a8847d63a92f2228844faacf73866a02668e
     restart: always
     ports:
       - 3000:3000
-
   nginx:
     image: nginx:stable
     restart: always
@@ -15,7 +13,6 @@ services:
       - ./build/:/usr/share/nginx/html/
     ports:
       - 80:80
-
   db:
     image: postgres
     container_name: local_pgdb
@@ -26,7 +23,6 @@ services:
       - .env
     volumes:
       - local_pgdata:/var/lib/postgresql/data
-
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin4_container
@@ -37,7 +33,6 @@ services:
       - .env
     volumes:
       - pgadmin-data:/var/lib/pgadmin
-
 volumes:
   local_pgdata:
   pgadmin-data:
