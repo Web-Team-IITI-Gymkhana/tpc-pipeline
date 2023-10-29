@@ -24,5 +24,6 @@ jobs:
           password: ${{ secrets.DC_PASS }}
           envs: BUILD_DIR
           script: |
-            cd ~/tpc_portal && touch iamhere.txt
-            echo "$BUILD_DIR" > build_dir.txt
+            cd ~/tpc_portal
+            git pull origin main
+            docker compose up -d --no-deps --build
