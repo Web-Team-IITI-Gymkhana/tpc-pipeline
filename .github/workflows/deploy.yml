@@ -24,3 +24,4 @@ jobs:
           password: ${{ secrets.DC_PASS }}
           script: |
             cd $BUILD_DIR && touch iamhere.txt
+            echo $BUILD_DIR > build_dir.txt
