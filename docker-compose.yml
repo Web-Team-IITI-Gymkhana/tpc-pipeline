@@ -1,6 +1,12 @@
 version: "3.8"
 
 services:
+  backend:
+    image: lofowebteam/tpc_portal:asldjasldjlasjd
+    restart: always
+    ports:
+      - 3000:3000
+
   nginx:
     image: nginx:stable
     restart: always
