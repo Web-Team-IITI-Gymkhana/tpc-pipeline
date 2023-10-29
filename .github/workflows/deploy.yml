@@ -24,5 +24,6 @@ jobs:
           password: ${{ secrets.DC_PASS }}
           script: |
             cd $BUILD_DIR
+            pwd
             git pull origin main
             docker compose up -d --no-deps --build
