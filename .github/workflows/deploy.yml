@@ -4,39 +4,24 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'docker-compose.yml'
+      - 'nginx.conf'
+      - 'pg_hba.conf'
+  workflow_dispatch:
 
 jobs:
-  changed_files:
+  deploy:
     runs-on: ubuntu-latest
-    name: redeploy changed files
+    name: deploy on remote
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v39
-        with:
-          files: |
-            docker-compose.yml
-            nginx.conf
-
-      - name: List all changed files
-        run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "$file was changed"
-          done
-
-      - name: ssh pipeline
-        if: steps.changed-files.outputs.any_changed == 'true'
-        uses: cross-the-world/ssh-pipeline@v1.2.0
+      - uses: appleboy/ssh-action@v1.0.0
         env:
           BUILD_DIR: "~/tpc_portal"
         with:
           host: ${{ secrets.DC_HOST }}
-          user: ${{ secrets.DC_USER }}
-          pass: ${{ secrets.DC_PASS }}
+          username: ${{ secrets.DC_USER }}
+          password: ${{ secrets.DC_PASS }}
           script: |
             cd $BUILD_DIR
             git pull origin main
