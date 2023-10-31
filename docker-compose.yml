@@ -1,39 +1,55 @@
 version: "3.8"
 services:
-  backend:
-    image: lofowebteam/tpc_portal:866fafc929d9af5f024edc0052ce268f2812ad2b
+  frontend:
+    image: lofowebteam/tpc_portal_frontend:a2f618a3155474d8b7846826e3af89a8ab00f307
     restart: always
+    env_file:
+      - .env
     ports:
       - 3000:3000
+
+  backend:
+    image: lofowebteam/tpc_portal_backend:db784029c115e61d8996b1142dfd76297b2403d4
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 5000:5000
       
   nginx:
     image: nginx:stable
     restart: always
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./build/:/usr/share/nginx/html/
     ports:
       - 80:80
+      - 5432:5432
+
   db:
     image: postgres
     container_name: local_pgdb
     restart: always
-    ports:
-      - 5432:5432
+    # ports:
+    #   - 5432:5432
     env_file:
       - .env
     volumes:
       - local_pgdata:/var/lib/postgresql/data
+
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin4_container
     restart: always
     ports:
       - 8888:80
+    environment:
+      - PGADMIN_CONFIG_WTF_CSRF_ENABLED=False
+      - PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=False
     env_file:
       - .env
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+
 volumes:
   local_pgdata:
   pgadmin-data:
