@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   backend:
-    image: lofowebteam/tpc_portal:866fafc929d9af5f024edc0052ce268f2812ad2b
+    image: lofowebteam/tpc_portal_backend:db784029c115e61d8996b1142dfd76297b2403d4
     restart: always
     ports:
       - 3000:3000
