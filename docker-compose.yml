@@ -5,7 +5,6 @@ services:
     restart: always
     ports:
       - 3000:3000
-      
   nginx:
     image: nginx:stable
     restart: always
@@ -34,6 +33,8 @@ services:
       - .env
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+  frontend:
+    image: lofowebteam/tpc_portal_frontend:a2f618a3155474d8b7846826e3af89a8ab00f307
 volumes:
   local_pgdata:
   pgadmin-data:
