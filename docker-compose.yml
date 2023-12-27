@@ -10,6 +10,8 @@ services:
   backend:
     image: lofowebteam/tpc_portal_backend:d335fa92ed4d77ee71ad93817a68d54d68a745f1
     restart: always
+    environment:
+      - PORT=5000
     env_file:
       - .env
     ports:
