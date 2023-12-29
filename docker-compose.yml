@@ -8,7 +8,7 @@ services:
     ports:
       - 3000:3000
   backend:
-    image: lofowebteam/tpc_portal_backend:d335fa92ed4d77ee71ad93817a68d54d68a745f1
+    image: lofowebteam/tpc_portal_backend:20e361c3288cf13a0e2fb0285effe31adee6afd9
     restart: always
     environment:
       - PORT=5000
