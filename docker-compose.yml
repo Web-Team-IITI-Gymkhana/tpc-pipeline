@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   frontend:
-    image: lofowebteam/tpc_portal_frontend:46ecab0d21a2ddca60b60b68f4bcb7c4d789251e
+    image: lofowebteam/tpc_portal_frontend:527266337824f7ecac3aba594113d3657c457813
     restart: always
     env_file:
       - .env
