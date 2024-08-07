@@ -1,14 +1,13 @@
 version: "3.8"
 services:
   frontend:
-    image: lofowebteam/tpc_portal_frontend:44a67c9e2046f354fe24204d18a45fddbfe853de
-    restart: always
+    build: ./tpc-frontend/.
     env_file:
       - .env
     ports:
       - 3000:3000
   backend:
-    image: lofowebteam/tpc_portal_backend:c33e7187b975035aeafffc76af5cac049ca46f8f
+    build: ./tpc-backend/.
     restart: always
     environment:
       - PORT=5000
@@ -40,7 +39,6 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin4_container
-    restart: always
     ports:
       - 8888:80
     environment:
