@@ -8,9 +8,10 @@ services:
       - 3000:3000
   backend:
     build: ./tpc-backend/.
-    restart: always
     environment:
       - PORT=5000
+    volumes:
+      - ./tpc-backend/uploads:/usr/src/app/uploads
     env_file:
       - .env
     ports:
