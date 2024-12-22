@@ -7,8 +7,8 @@ services:
       - 3000:3000
   landing_page:
     build: ./tpc-landing-page/.
-    env_file:
-      - ./tpc-landing-page/.env
+    # env_file:
+    #   - ./tpc-landing-page/.env
     # ports:
     #   - 3001:3000
   backend:
