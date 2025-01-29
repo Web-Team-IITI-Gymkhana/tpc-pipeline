@@ -35,14 +35,14 @@ services:
       - 5432:5432
   db:
     image: postgres
-    container_name: local_pgdb
+    container_name: pgdb
     restart: always
     # ports:
     #   - 5432:5432
     env_file:
       - .env
     volumes:
-      - local_pgdata:/var/lib/postgresql/data
+      - local-pgdata:/var/lib/postgresql/data
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin4_container
@@ -56,5 +56,5 @@ services:
     volumes:
       - pgadmin-data:/var/lib/pgadmin
 volumes:
-  local_pgdata:
+  local-pgdata:
   pgadmin-data:
